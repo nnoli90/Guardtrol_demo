@@ -2,20 +2,24 @@ package com.example.guardtroldemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     EditText userName;
     EditText pointName;
+    EditText image;
     TextView location;
     Button save;
     Button getLocation;
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     double lon;
     double lat;
     String address;
+    ArrayList<Location> allL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         getLocation = findViewById(R.id.get_location);
         savedLocation = findViewById(R.id.list_view);
         location = findViewById(R.id.location);
+        image = findViewById(R.id.image_url);
 
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -40,20 +46,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 database  db = new database(MainActivity.this);
 
-                ArrayList<Location> allL = new ArrayList<>();
+                allL = new ArrayList<>();
 
+               String img = image.getText().toString();
 
                 if (userName.getText().toString() !="" && pointName.getText().toString() != ""
                         && getLocation.getText().toString().length()>5){
 
-                    db.insertRoute(userName.getText().toString(),lon,lat,address);
+                     try {
+                        db.insertRoute(userName.getText().toString(),lon,lat,address,img);
+                    }catch (Exception e){
+
+                        Toast.makeText(MainActivity.this, "Point code already Exist", Toast.LENGTH_SHORT).show();
+                    }
+
+
 
 
                  Cursor res =   db.getAllroutes();
 
                  while (res.moveToNext()){
 
-                     allL.add(new Location(res.getDouble(2),res.getDouble(3),res.getString(4),res.getString(1)));
+                     allL.add(new Location(res.getDouble(2),res.getDouble(3),res.getString(4),
+                             res.getString(1),res.getString(5)));
 
 
                  }
@@ -100,6 +115,26 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        savedLocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+              String  name = allL.get(i).name;
+              String  image = allL.get(i).imageUrl;
+                Intent intent = new Intent(MainActivity.this,Clock_in.class);
+                 intent.putExtra("name",name);
+                 intent.putExtra("image",image);
+                 startActivity(intent);
+
+
+            }
+        });
+
+
+
+
+
     }
 
     @Override
@@ -112,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
 
         while (res.moveToNext()){
 
-            allL.add(new Location(res.getDouble(2),res.getDouble(3),res.getString(4),res.getString(1)));
+            allL.add(new Location(res.getDouble(2),res.getDouble(3),
+                    res.getString(4),res.getString(1),res.getString(5)));
 
 
         }
@@ -123,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 savedLocation.setAdapter(myadapter);
 
 }
+
+
 
 
 

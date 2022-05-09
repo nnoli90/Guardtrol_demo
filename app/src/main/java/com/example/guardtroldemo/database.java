@@ -40,8 +40,8 @@ public class database extends SQLiteOpenHelper {
 //                "present boolean )");
 
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + location + "( id INTEGER PRIMARY KEY NOT NULL,location_name TEXT," +
-                "longitude DOUBLE, latitude DOUBLE,address TEXT )");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + location + "( id INTEGER PRIMARY KEY NOT NULL,location_name TEXT Unique," +
+                "longitude DOUBLE, latitude DOUBLE,address TEXT,image TEXT  )");
 
 
 
@@ -54,7 +54,7 @@ public class database extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertRoute(String location_name, double longitude, double latitude, String address) {
+    public boolean insertRoute(String location_name, double longitude, double latitude, String address, String image) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -62,6 +62,7 @@ public class database extends SQLiteOpenHelper {
         contentValues.put("longitude", longitude);
         contentValues.put("latitude", latitude);
         contentValues.put("address", address);
+        contentValues.put("image", image);
 
 
         long result = db.insert(routeTable, null, contentValues);

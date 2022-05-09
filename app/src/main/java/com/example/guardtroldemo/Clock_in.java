@@ -73,7 +73,7 @@ public class Clock_in extends AppCompatActivity {
     int user_id;
     String rCode;
     String tTime;
-    String ImgHttp = "https://res.cloudinary.com/dln68reqa/image/upload/v1650443801/verified/wg7dqxgup7r2vwuqxcgd.jpg";
+    String ImgHttp;
     String guardName;
 
 
@@ -115,26 +115,27 @@ public class Clock_in extends AppCompatActivity {
 //        initialize view variables
         openC = findViewById(R.id.opencamera);
         verify = findViewById(R.id.verify);
-        submit_tour = findViewById(R.id.submit_tour);
+
         user_image = findViewById(R.id.img);
         guard_pic = findViewById(R.id.guard_pic);
         longitude = findViewById(R.id.longitude);
         adress = findViewById(R.id.adress);
         loading = findViewById(R.id.loading);
-        id = (EditText) findViewById(R.id.guard_id);
-        noOfRoute = findViewById(R.id.no_of_route);
-        completedRoute = findViewById(R.id.completed_route);
+
         guard_name = findViewById(R.id.guard_name);
         routeCode = findViewById(R.id.route_code);
-        progress_bar = findViewById(R.id.progress_bar);
         route_code_text = findViewById(R.id.route_text);
-        guard_message = findViewById(R.id.guard_message);
 
 
 
 //      initialize the picture class
         mypic = new user_picture();
 
+        Bundle bundle = getIntent().getExtras();
+        String   name = bundle.getString("name");
+         ImgHttp = bundle.getString("image");
+
+        guard_name.setText(name);
 
         //set image on image view
         Glide.with(this)
@@ -152,21 +153,9 @@ public class Clock_in extends AppCompatActivity {
         db  = new database(this);
 
 
-        Bundle bundle = getIntent().getExtras();
-        Boolean  Route = bundle.getBoolean("Route");
-         user_id = bundle.getInt("id");
-         guardName = db.getName(user_id);
 
 
-           progress_bar.setVisibility(View.INVISIBLE);
-           routeCode.setVisibility(View.INVISIBLE);
-           route_code_text.setVisibility(View.INVISIBLE);
-           completedRoute.setVisibility(View.INVISIBLE);
-           noOfRoute.setVisibility(View.INVISIBLE);
-           performRoute = false;
-           guard_message.setVisibility(View.INVISIBLE);
-           submit_tour.setVisibility(View.INVISIBLE);
-           id.setText(String.valueOf(user_id));
+
 
 
 
@@ -269,7 +258,7 @@ public class Clock_in extends AppCompatActivity {
                                                 myDialog.dismissDialog();
 
 
-                                                if (mylocation.isLocationSClock_in()) {
+                                                if (mylocation.locationSRoute) {
 
                                                     //send the image verification process to a different thread
                                                     AsyncTaskRunnerVerifyImgClock_in  verfiyClock_in = new AsyncTaskRunnerVerifyImgClock_in();
@@ -529,8 +518,7 @@ public void messageDialog(String title, String message){
                 alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db.incrementCompletedTour(user_id);
-                        db.deleteRoutStatusDbData();
+
                     }
                 });
                 alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -567,7 +555,7 @@ public void messageDialog(String title, String message){
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
-                    db.deleteRoutStatusDbData();
+
                 }
             });
             alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -628,10 +616,7 @@ public void messageDialog(String title, String message){
                 mypic.setVerifiedstatus(0);
                 verify.setEnabled(true);
                 Toast.makeText(Clock_in.this, " on post ran for image verified", Toast.LENGTH_SHORT).show();
-                    db.guardSignIn(user_id);
-                boolean tr =    db.insertToFirstQueue(user_id);
 
-                Toast.makeText(Clock_in.this, "Added to qoute queue"+ tr, Toast.LENGTH_SHORT).show();
 
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {

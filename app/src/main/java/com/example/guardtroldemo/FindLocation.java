@@ -157,7 +157,7 @@ public class FindLocation {
           locationSClock_in = true;
 
 
-          if(d <= 15){
+          if(d <= 18){
 
               locationSRoute = true;
 
