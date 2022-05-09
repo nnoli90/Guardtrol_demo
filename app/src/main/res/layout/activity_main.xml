@@ -57,7 +57,7 @@
         android:layout_marginTop="13dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginbottom="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_toRightOf="@+id/label"
         android:background="#4FF3F3F3" />
 
