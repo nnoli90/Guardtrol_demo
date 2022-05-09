@@ -61,11 +61,22 @@
         android:layout_toRightOf="@+id/label"
         android:background="#4FF3F3F3" />
 
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Saved point:"
+        android:textSize="15dp"
+        android:lines="3"/>
+
     <Button
         android:id="@+id/get_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/location_name"
+        android:layout_below="@+id/location"
         android:layout_marginTop="20dp"
         android:text="Get Location" />
 
