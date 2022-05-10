@@ -65,7 +65,7 @@ public class database extends SQLiteOpenHelper {
         contentValues.put("image", image);
 
 
-        long result = db.insert(routeTable, null, contentValues);
+        long result = db.insert(location, null, contentValues);
 
         if (result == -1) {
             return false;
@@ -81,7 +81,7 @@ public class database extends SQLiteOpenHelper {
 
     public Cursor getAllroutes() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM " + routeTable, null);
+        Cursor res = db.rawQuery("SELECT * FROM " + location, null);
 
 
         return res;

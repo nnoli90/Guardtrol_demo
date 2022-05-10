@@ -1,8 +1,12 @@
 package com.example.guardtroldemo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -88,32 +92,44 @@ public class MainActivity extends AppCompatActivity {
         getLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FindLocation mylocal = new FindLocation(MainActivity.this);
 
-                loadingLocationDialog dialog = new loadingLocationDialog(MainActivity.this);
-                dialog.startLoading();
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    FindLocation mylocal = new FindLocation(MainActivity.this);
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        lon = mylocal.getLon();
-                        lat = mylocal.getLat();
+                    loadingLocationDialog dialog = new loadingLocationDialog(MainActivity.this);
+                    dialog.startLoading();
 
-                        if (mylocal.getCurrent_adress() != null) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismissDialog();
+                            lon = mylocal.getLon();
+                            lat = mylocal.getLat();
+                            Toast.makeText(MainActivity.this, ""+lon+lat, Toast.LENGTH_SHORT).show();
+                            if (mylocal.getCurrent_adress() != null) {
 
-                            address = mylocal.getCurrent_adress().get(0).getAddressLine(0);
+                                address = mylocal.getCurrent_adress().get(0).getAddressLine(0);
+
+                            }
+
+                            String local = address + "\nLon:" + lon + "\nLat:" + lat;
+                            location.setText(local);
 
                         }
+                    }, 10000);
 
-                        String local = address + "\nLon:"+lon+ "\nLat:"+lat;
-                        location.setText(address);
 
-                    }
-                },1000);
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                            Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION}, 200);
 
+                }
 
             }
+
         });
 
         savedLocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ArrayList<Location> allL = new ArrayList<>();
+        allL = new ArrayList<>();
         database db = new database(MainActivity.this);
         Cursor res =   db.getAllroutes();
 

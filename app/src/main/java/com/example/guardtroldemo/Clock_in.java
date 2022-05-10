@@ -143,13 +143,7 @@ public class Clock_in extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(guard_pic);
 
-      progress_bar.setOnTouchListener(new View.OnTouchListener() {
-          @Override
-          public boolean onTouch(View view, MotionEvent motionEvent) {
-              return true;
-          }
-      });
-        //initialize database
+    //initialize database
         db  = new database(this);
 
 
@@ -189,7 +183,7 @@ public class Clock_in extends AppCompatActivity {
                 }
 
 //                takePicture.putExtra(MediaStore.EXTRA_OUTPUT,photoFile);
-                 Uri pfile =  FileProvider.getUriForFile(Clock_in.this,"com.example.monitoring_app.fileprovider",photoFile);
+                 Uri pfile =  FileProvider.getUriForFile(Clock_in.this,"com.example.guardtroldemo.fileprovider",photoFile);
                 takePicture.putExtra(MediaStore.EXTRA_OUTPUT,pfile);
                 someActivityResultLauncher.launch(takePicture);
 
@@ -232,7 +226,6 @@ public class Clock_in extends AppCompatActivity {
 
                                 if (imgVerification != null) {
 
-                                    if (!id.getText().toString().trim().equals("")) {
                                         myDialog.startLoading();
 
                                         //grts the user id from the edit text field
@@ -276,11 +269,7 @@ public class Clock_in extends AppCompatActivity {
                                         }, 10000);
 
 
-                                    } else {
-                                        messageDialog("No Id Entered", "Please enter your user Id");
-                                        verify.setEnabled(true);
 
-                                    }
                                 } else {
                                     messageDialog("No Image captured", "Please capture Image");
                                     verify.setEnabled(true);
