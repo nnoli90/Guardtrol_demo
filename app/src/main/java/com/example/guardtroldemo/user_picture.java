@@ -169,7 +169,7 @@ public class user_picture {
                 jsonObject.put("img1","data:image/jpeg;base64,"+image1);
                 jsonObject.put("img2","data:image/jpeg;base64,"+image2);
 
-
+                writeTofile(m,jsonObject.toString());
 
 
             }catch (JSONException e){
@@ -189,14 +189,23 @@ public class user_picture {
                     if(response !=null) {
 
 
-                        JSONObject result = response.optJSONObject("pair_1");
+                        boolean result =false;
+                        try {
 
-                        if(result != null) {
+                            result = response.optJSONObject("pair_1").getBoolean("verified");
+
+
+                        } catch (NullPointerException e) {
+                            
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(result) {
 //                                 Intent i = new Intent(m, Clock_in_History.class);
 //                                 m.startActivity(i);
                            setVerifiedstatus(1);
 //
-
                         }
 
                         else {
@@ -339,22 +348,22 @@ public class user_picture {
 
 
 
-//    public void writeTofile(Context c ,String image2) {
-//        File file = new File(c.getExternalFilesDir("/").getAbsolutePath() + "/output.txt");
-//        FileOutputStream stream;
-//
-//        {
-//            try {
-//                stream = new FileOutputStream(file);
-//                stream.write(image2.toString().getBytes());
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//    }
+    public void writeTofile(Context c ,String image2) {
+        File file = new File(c.getExternalFilesDir("/").getAbsolutePath() + "/output.txt");
+        FileOutputStream stream;
+
+        {
+            try {
+                stream = new FileOutputStream(file);
+                stream.write(image2.toString().getBytes());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
 
 

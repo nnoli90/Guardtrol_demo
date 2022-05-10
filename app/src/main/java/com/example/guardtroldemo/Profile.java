@@ -27,7 +27,7 @@ public class Profile extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         gN = bundle.getString("name");
         img = bundle.getString("image");
-
+        guardName.setText(gN);
         //set image on image view
         Glide.with(this)
                 .load(img)

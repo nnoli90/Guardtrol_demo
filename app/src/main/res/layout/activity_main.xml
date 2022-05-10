@@ -80,9 +80,9 @@
             android:layout_marginRight="10dp"
             android:background="#B9F3F3F3"
             android:gravity="center"
-            android:lines="3"
+            android:lines="4"
             android:text=" my location"
-            android:textSize="15dp" />
+            android:textSize="12dp" />
 
 
         <Button
@@ -92,15 +92,15 @@
             android:layout_below="@+id/location"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:textAllCaps="false"
-            android:text="Get Location" />
+            android:text="Get Location"
+            android:textAllCaps="false" />
 
 
         <Button
             android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label4"
+            android:layout_below="@+id/list_view"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:text="Save" />
@@ -109,18 +109,18 @@
             android:id="@+id/label3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/get_location"
+            android:layout_below="@+id/image_url"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:text="Saved point:"
             android:textSize="16dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:layout_below="@+id/label3"
+           android:layout_below="@id/image_url"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
             tools:listitem="@layout/all_location" />
@@ -129,7 +129,7 @@
             android:id="@+id/image_url"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/list_view"
+            android:layout_below="@id/get_location"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
@@ -142,7 +142,7 @@
             android:id="@+id/label4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/list_view"
+            android:layout_below="@id/get_location"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:text="Image:"
