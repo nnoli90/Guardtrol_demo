@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -95,7 +97,7 @@ public class Clock_in extends AppCompatActivity {
     //for location class
     FindLocation mylocation;
 
-
+    ProgressDialog dialog;
     //for database
     database db;
     @SuppressLint("ClickableViewAccessibility")
@@ -153,6 +155,10 @@ public class Clock_in extends AppCompatActivity {
 
 
 
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Please Wait....");
+        dialog.setCancelable(false);
+
 
 
         DownloadImage d = new DownloadImage();
@@ -175,6 +181,7 @@ public class Clock_in extends AppCompatActivity {
 
                 if(ContextCompat.checkSelfPermission(Clock_in.this, Manifest.permission.CAMERA) ==
                         PackageManager.PERMISSION_GRANTED){
+
 
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -576,10 +583,12 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
     protected Void doInBackground(Void... voids) {
 
 
-        image1 = mypic.getBase64(imgVerification);
+        image1 = mypic.getSBase64(imgVerification);
+
         do {
 
-            }while (mypic.uncompleteBase64);
+            Log.e("second base64","am stil Running");
+            }while (mypic.uncompleteSBase64);
 
 
         return null;
@@ -616,11 +625,20 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
         protected Void doInBackground(Void... voids) {
 
 
-            boolean mem =  mypic.loadBitmapByGlide(ImgHttp, Clock_in.this);
+            boolean mem = false;
 
             do {
+              mem =  mypic.loadBitmapByGlide(ImgHttp, Clock_in.this);
 
-            }while (!mem);
+                Log.e("first base64","am stil Running");
+
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }while (mem == false);
 
             image2 = mypic.getBase64(mypic.getImg());
 
@@ -635,8 +653,8 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPostExecute(Void img) {
             super.onPostExecute(img);
+            dialog.dismiss();
 
-            Toast.makeText(Clock_in.this, "Bitmap 1 is ready", Toast.LENGTH_SHORT).show();
 
 
 
@@ -645,7 +663,8 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(Clock_in.this, " pre execute ran for base64", Toast.LENGTH_SHORT).show();
+            dialog.show();
+
 
         }
     }

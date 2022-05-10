@@ -11,12 +11,25 @@
         android:theme="@style/Theme.GuardtrolDemo">
         <activity
             android:name=".Profile"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <activity
             android:name=".Clock_in"
+            android:screenOrientation="portrait"
+
             android:exported="false" />
 
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -27,17 +40,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider" />
         </provider>
-
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
 
     </application>

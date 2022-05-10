@@ -5,7 +5,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.location.Address;
 import android.media.ExifInterface;
+import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +31,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class user_picture {
@@ -40,6 +43,7 @@ public class user_picture {
 
 
     boolean uncompleteBase64 = true;
+    boolean uncompleteSBase64 = true;
     boolean route;
     Bitmap img;
 
@@ -148,7 +152,22 @@ public class user_picture {
     }
 
 
+    @SuppressLint("NewApi")
+    public StringBuffer getSBase64(Bitmap b){
 
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        b.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+        StringBuffer my = new StringBuffer();
+        my.append(Base64.encodeToString(byteArray,Base64.NO_WRAP));
+        uncompleteSBase64 = false;
+
+        return my;
+
+
+    }
 
 
 
@@ -364,6 +383,7 @@ public class user_picture {
         }
 
     }
+
 
 
 
