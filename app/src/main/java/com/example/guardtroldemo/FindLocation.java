@@ -155,12 +155,12 @@ public class FindLocation {
 
 //          Toast.makeText(mContext, "Login in progress", Toast.LENGTH_LONG).show();
           locationSClock_in = true;
-
+          distance = String.format(Locale.US," %2f meters", d);
 
           if(d <= 18){
 
               locationSRoute = true;
-
+              distance = String.format(Locale.US," %2f meters", d);
 
           }
 

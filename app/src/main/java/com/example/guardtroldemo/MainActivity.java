@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(userName.getText().toString().trim().length() >3) {
+
 
                     double lati = allL.get(i).lat;
                     double longi = allL.get(i).lon;
@@ -165,12 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("lat", lati);
                     startActivity(intent);
 
-                }else{
-                    messageDialog("No name Entered", "Please enter your name");
 
-
-
-                }
 
             }
         });

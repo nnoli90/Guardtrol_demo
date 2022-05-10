@@ -62,25 +62,16 @@
                 android:id="@+id/verify"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/route_code"
+                android:layout_below="@+id/opencamera"
+
                 android:layout_centerInParent="true"
                 android:layout_marginTop="30dp"
-
                 android:padding="10dp"
+
                 android:text="verify"
                 android:textAllCaps="false"
-
                 android:textColor="@color/white" />
 
-            <EditText
-                android:id="@+id/route_code"
-                android:layout_width="180dp"
-                android:layout_height="60dp"
-                android:layout_below="@+id/opencamera"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/route_text"
-                android:inputType="text"
-                android:padding="5dp" />
 
             <ImageButton
                 android:id="@+id/opencamera"
@@ -88,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/camera2" />
 
@@ -142,18 +133,6 @@
 
             </RelativeLayout>
 
-
-            <TextView
-                android:id="@+id/route_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/opencamera"
-                android:layout_marginTop="10dp"
-                android:labelFor="@+id/route_code"
-                android:padding="10dp"
-                android:text="image URL:"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
 
 
             <com.airbnb.lottie.LottieAnimationView

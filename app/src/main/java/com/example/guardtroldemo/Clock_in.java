@@ -67,7 +67,7 @@ public class Clock_in extends AppCompatActivity {
     String tTime;
     String ImgHttp;
     String guardName;
-
+    String   name;
 
     //for images
     File photoFile;
@@ -126,7 +126,7 @@ public class Clock_in extends AppCompatActivity {
         mypic = new user_picture();
 
         Bundle bundle = getIntent().getExtras();
-        String   name = bundle.getString("name");
+        name = bundle.getString("name");
         ImgHttp = bundle.getString("image");
 
         expectedLon = bundle.getDouble("lon");
@@ -536,6 +536,8 @@ public class Clock_in extends AppCompatActivity {
                         @Override
                         public void run() {
                             Intent i = new Intent(Clock_in.this,Profile.class);
+                            i.putExtra("name", name);
+                            i.putExtra("image", ImgHttp);
                             startActivity(i);
                             finish();
                         }
@@ -614,7 +616,7 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
         protected Void doInBackground(Void... voids) {
 
 
-            boolean mem =  mypic.loadBitmapByGlide("https://i.ibb.co/5c8hD5f/EBUSKY02.jpg", Clock_in.this);
+            boolean mem =  mypic.loadBitmapByGlide(ImgHttp, Clock_in.this);
 
             do {
 
@@ -647,12 +649,6 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
 
         }
     }
-
-
-
-
-
-
 
 
 
