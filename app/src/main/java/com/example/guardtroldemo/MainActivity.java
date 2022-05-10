@@ -53,31 +53,47 @@ public class MainActivity extends AppCompatActivity {
                 allL = new ArrayList<>();
 
                String img = image.getText().toString();
+               String user_name = userName.getText().toString();
+               String pointN = pointName.getText().toString();
 
-                if (userName.getText().toString() !="" && pointName.getText().toString() != ""
-                        && getLocation.getText().toString().length()>5){
+                if ( user_name.trim().length() >= 2 &&
+                        pointN.trim().length() >= 2
+                        && getLocation.getText().toString().length()>8 ){
 
-                     try {
-                        db.insertRoute(userName.getText().toString(),lon,lat,address,img);
-                    }catch (Exception e){
+                    if(img.length() > 5) {
 
-                        Toast.makeText(MainActivity.this, "Point code already Exist", Toast.LENGTH_SHORT).show();
+                        try {
+                            db.insertRoute(userName.getText().toString(), lon, lat, address, img, user_name);
+                        } catch (Exception e) {
+
+                            Toast.makeText(MainActivity.this, "Point code already Exist", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    else {
+
+                        messageDialog("Enter Image Url","Please enter a link to your Image");
                     }
 
 
 
+                }else {
 
-                 Cursor res =   db.getAllroutes();
-
-                 while (res.moveToNext()){
-
-                     allL.add(new Location(res.getDouble(2),res.getDouble(3),res.getString(4),
-                             res.getString(1),res.getString(5)));
+                    messageDialog("Incomplete Form", "please complete the form");
+                }
 
 
-                 }
+                Cursor res =   db.getAllroutes();
+
+                while (res.moveToNext()){
+
+                    allL.add(new Location(res.getDouble(2),res.getDouble(3),res.getString(4),
+                            res.getString(1),res.getString(5),res.getString(6)));
+
 
                 }
+
+
                 list_adapter_location myadapter = new list_adapter_location(MainActivity.this,allL);
                 savedLocation.setAdapter(myadapter);
 
@@ -93,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) ==
                         PackageManager.PERMISSION_GRANTED) {
                     FindLocation mylocal = new FindLocation(MainActivity.this);
 
@@ -118,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                             location.setText(local);
 
                         }
-                    }, 10000);
+                    }, 12000);
 
 
                 } else {
@@ -136,13 +152,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-              String  name = allL.get(i).name;
-              String  image = allL.get(i).imageUrl;
-                Intent intent = new Intent(MainActivity.this,Clock_in.class);
-                 intent.putExtra("name",name);
-                 intent.putExtra("image",image);
-                 startActivity(intent);
+                if(userName.getText().toString().trim().length() >3) {
 
+                    double lati = allL.get(i).lat;
+                    double longi = allL.get(i).lon;
+                    String name = allL.get(i).name;
+                    String image = allL.get(i).imageUrl;
+                    Intent intent = new Intent(MainActivity.this, Clock_in.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("image", image);
+                    intent.putExtra("lon", longi);
+                    intent.putExtra("lat", lati);
+                    startActivity(intent);
+
+                }else{
+                    messageDialog("No name Entered", "Please enter your name");
+
+
+
+                }
 
             }
         });
@@ -164,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         while (res.moveToNext()){
 
             allL.add(new Location(res.getDouble(2),res.getDouble(3),
-                    res.getString(4),res.getString(1),res.getString(5)));
+                    res.getString(4),res.getString(1),res.getString(5),res.getString(6)));
 
 
         }
@@ -177,7 +205,14 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
+    public void messageDialog(String title, String message){
 
+        MessageDialog myDialog = new MessageDialog();
+        myDialog.showDialog(MainActivity.this,message,title);
+
+
+
+    }
 
 
 }

@@ -47,6 +47,7 @@ public class list_adapter_location extends ArrayAdapter<Location> {
 
         TextView address = convertView.findViewById(R.id.adress);
         TextView lonLat = convertView.findViewById(R.id.lon_lat);
+        TextView name = convertView.findViewById(R.id.name);
 
 
 
@@ -54,6 +55,7 @@ public class list_adapter_location extends ArrayAdapter<Location> {
 //
         locationname.setText(beats.name);
         address.setText(beats.address);
+        name.setText(beats.name);
         String lonL = "Lon: "+beats.lon+ "\nLat: "+ beats.lat;
         lonLat.setText(lonL);
 

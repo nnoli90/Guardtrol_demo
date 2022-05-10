@@ -1,139 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:paddingTop="40dp"
-    android:paddingEnd="10dp"
-    android:paddingStart="10dp">
-
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:text="Enter name:"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
 
-    <EditText
-        android:id="@+id/name"
+
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/label"
-        android:background="#4FF3F3F3" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:paddingTop="40dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Enter name:"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/label2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="10dp"
-        android:text="Point name:"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/location_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/name"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@+id/label"
-        android:background="#4FF3F3F3" />
-
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/location_name"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:lines="3"
-        android:text="location"
-        android:textSize="15dp" />
-
-    <Button
-        android:id="@+id/get_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/location"
-        android:layout_marginTop="20dp"
-        android:text="Get Location" />
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/label"
+            android:background="#B9F3F3F3" />
 
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Save" />
-    <TextView
-        android:id="@+id/label3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/get_location"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:text="Saved point:"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:text="Point name:"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_below="@+id/label3"
-        android:layout_marginTop="20dp" />
-
-    <EditText
-        android:id="@+id/image_url"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/list_view"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/label4"
-        android:background="#4FF3F3F3" />
-
-    <TextView
-        android:id="@+id/label4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/list_view"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:text="Image:"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/location_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/name"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/label"
+            android:background="#B9F3F3F3" />
 
 
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#B9F3F3F3"
+            android:gravity="center"
+            android:lines="3"
+            android:text=" my location"
+            android:textSize="15dp" />
+
+
+        <Button
+            android:id="@+id/get_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false"
+            android:text="Get Location" />
+
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label4"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:text="Save" />
+
+        <TextView
+            android:id="@+id/label3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/get_location"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Saved point:"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@+id/label3"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            tools:listitem="@layout/all_location" />
+
+        <EditText
+            android:id="@+id/image_url"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/list_view"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@+id/label4"
+            android:background="#B9F3F3F3" />
+
+
+        <TextView
+            android:id="@+id/label4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_view"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:text="Image:"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 
-</RelativeLayout>
+
+
+    </RelativeLayout>
+</ScrollView>
+

@@ -65,11 +65,12 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/okay"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:layout_below="@+id/message"
         android:layout_centerInParent="true"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="15dp"
+        android:background="@color/purple_500"
         android:elevation="@dimen/cardview_default_elevation"
         android:text="OK"
         android:textColor="@color/white"

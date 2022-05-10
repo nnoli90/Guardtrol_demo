@@ -50,21 +50,13 @@ public class Clock_in extends AppCompatActivity {
 
     // global variables for views
     Button verify;
-    Button submit_tour;
     ImageButton openC;
     TextView longitude;
-    TextView noOfRoute;
-    TextView completedRoute;
     TextView adress;
     TextView guard_name;
-    TextView route_code_text;
-    EditText routeCode;
-    EditText id;
-    EditText guard_message;
     ImageView user_image;
     ImageView guard_pic;
     com.airbnb.lottie.LottieAnimationView loading;
-    SeekBar progress_bar;
 
     //for route
     int tRoute;
@@ -92,6 +84,10 @@ public class Clock_in extends AppCompatActivity {
 
     double lat;
     double lon;
+    double expectedLon;
+    double getExpectedLat;
+
+
     user_picture mypic;
     StringBuffer image1;
     StringBuffer image2;
@@ -123,8 +119,6 @@ public class Clock_in extends AppCompatActivity {
         loading = findViewById(R.id.loading);
 
         guard_name = findViewById(R.id.guard_name);
-        routeCode = findViewById(R.id.route_code);
-        route_code_text = findViewById(R.id.route_text);
 
 
 
@@ -133,7 +127,15 @@ public class Clock_in extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String   name = bundle.getString("name");
-         ImgHttp = bundle.getString("image");
+        ImgHttp = bundle.getString("image");
+
+        expectedLon = bundle.getDouble("lon");
+        getExpectedLat = bundle.getDouble("lat");
+
+
+
+
+
 
         guard_name.setText(name);
 
@@ -229,7 +231,7 @@ public class Clock_in extends AppCompatActivity {
                                         myDialog.startLoading();
 
                                         //grts the user id from the edit text field
-                                        int Uid = Integer.parseInt(id.getText().toString());
+
                                         Handler handler = new Handler();
                                         handler.postDelayed(new Runnable() {
                                             @Override
@@ -246,7 +248,8 @@ public class Clock_in extends AppCompatActivity {
                                                 longitude.setText(String.format(Locale.US, "Lon: %9f \n Lat: %9f", lon, lat));
 
 
-                                                mylocation.verify(6.499712, 3.190435, lat, lon);
+//                                                confirms location
+                                                mylocation.verify(getExpectedLat, expectedLon, lat, lon);
 
                                                 myDialog.dismissDialog();
 
@@ -486,86 +489,7 @@ public class Clock_in extends AppCompatActivity {
 
 
 
-public void messageDialog(String title, String message){
 
-    MessageDialog myDialog = new MessageDialog();
-    myDialog.showDialog(Clock_in.this,message,title);
-
-
-
-}
-
-    public void submitTour(View view) {
-
-        if (tRoute == cRoute) {
-            String g_message = guard_message.getText().toString().trim();
-
-            if (g_message.equals("")) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Clock_in.this);
-                alertDialog.setTitle("Submit Tour");
-                alertDialog.setMessage("You have not Entered any message do you want to submit tour");
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(Clock_in.this, "Operation cancelled", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                alertDialog.setCancelable(true);
-                alertDialog.create().show();
-
-
-            }
-
-
-        }
-        String g_message = guard_message.getText().toString().trim();
-
-        if(g_message.equals("")) {
-
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(Clock_in.this);
-            alertDialog.setTitle("Incomplete Tour");
-            alertDialog.setMessage("Please Enter Message Before Submitting");
-            alertDialog.setCancelable(true);
-            alertDialog.create().show();
-            guard_message.requestFocus();
-
-        }else {
-
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(Clock_in.this);
-            alertDialog.setTitle("Incomplete Tour");
-            alertDialog.setMessage("Do you want to submit tour?\nthis action cannot be reverted");
-            alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-
-                }
-            });
-            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(Clock_in.this, "Operation cancelled", Toast.LENGTH_SHORT).show();
-                }
-            });
-            alertDialog.setCancelable(true);
-            alertDialog.create().show();
-
-
-
-
-        }
-
-
-
-
-
-    }
 
 
 
@@ -734,7 +658,14 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
 
 
 
+    public void messageDialog(String title, String message){
 
+        MessageDialog myDialog = new MessageDialog();
+        myDialog.showDialog(Clock_in.this,message,title);
+
+
+
+    }
 
 
 
