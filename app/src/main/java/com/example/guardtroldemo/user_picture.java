@@ -74,8 +74,8 @@ public class user_picture {
 
     public Bitmap setPic(int width, int height, String currentPhotoPath) {
         // Get the dimensions of the View
-        int targetW = width;
-        int targetH = height;
+//        int targetW = width;
+//        int targetH = height;
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
@@ -86,7 +86,7 @@ public class user_picture {
         int photoH = bmOptions.outHeight;
 
         // Determine how much to scale down the image
-        int scaleFactor = Math.max(1, Math.min(photoW / targetW, photoH / targetH));
+        int scaleFactor = Math.max(1, Math.min(photoW / width, photoH / height));
 
         // Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
@@ -253,11 +253,6 @@ public class user_picture {
                     setVerifiedstatus(3);
                     Log.e("volley error",error.toString());
 
-                    try {
-                        deletefile(photo,m);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
 
                 }
             }
@@ -277,26 +272,29 @@ public class user_picture {
           }
 
 
-    public void deletefile(File ph, Context m) throws IOException {
-
-        File fdelete =new File(ph.getAbsolutePath());
-        if (fdelete.exists()){
-            if(fdelete.delete()){
-
-                Toast.makeText(m,
-                        "image file was deleted", Toast.LENGTH_LONG).show();
-            }
-
-
-        }else {
-
-            Toast.makeText(m,
-                    "image file was deleted", Toast.LENGTH_LONG).show();
-
-        }
-
-
-    }
+//    public void deletefile(File ph, Context m) throws IOException {
+//
+//
+//        String f = new File(ph.getAbsolutePath()).toString().replace("Pictures","");
+//
+//        File fdelete =new File(f );
+//        if (fdelete.isDirectory()){
+//            if(fdelete.delete()){
+//
+//                Toast.makeText(m,
+//                        "image file was deleted", Toast.LENGTH_LONG).show();
+//            }
+//
+//
+//        }else {
+//
+//            Toast.makeText(m,
+//                    "image file was deleted", Toast.LENGTH_LONG).show();
+//
+//        }
+//
+//
+//    }
 
 
 

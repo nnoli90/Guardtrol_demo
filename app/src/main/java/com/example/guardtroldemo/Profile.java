@@ -3,6 +3,7 @@ package com.example.guardtroldemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -11,7 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 public class Profile extends AppCompatActivity {
 
     TextView guardName;
-    de.hdodenhof.circleimageview.CircleImageView guardImage;
+    ImageView guardImage;
 
     String gN;
     String img;

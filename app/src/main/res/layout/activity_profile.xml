@@ -24,18 +24,16 @@
         android:textSize="20dp" />
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/guard_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-
+        android:layout_height="350dp"
+        android:layout_below="@+id/label"
         android:layout_centerInParent="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        app:civ_border_width="2dp" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:id="@+id/name"

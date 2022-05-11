@@ -157,7 +157,7 @@ public class FindLocation {
           locationSClock_in = true;
           distance = String.format(Locale.US," %2f meters", d);
 
-          if(d <= 18){
+          if(d <= 15){
 
               locationSRoute = true;
               distance = String.format(Locale.US," %2f meters", d);

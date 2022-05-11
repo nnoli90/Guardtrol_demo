@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -634,7 +635,7 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
 
 
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -682,7 +683,62 @@ private class AsyncTaskBase64 extends AsyncTask<Void,Void,Void>{
 
     }
 
+//
+//    public void deletefile(Context m) throws IOException {
+//
+////        File fdelete = m.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File fdelete = new File(Clock_in.this.getFilesDir().getParent() + File.separator + "Pictures");
+//        if (fdelete.exists()){
+//
+//            if(fdelete.delete()){
+//
+//                Toast.makeText(m,
+//                        "folder file was deleted", Toast.LENGTH_LONG).show();
+//            }
+//
+//
+//        }else {
+//
+//            Toast.makeText(m,
+//                    "image file was deleted", Toast.LENGTH_LONG).show();
+//
+//        }
+//
+//
+//    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
 
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+      deleteImages();
+    }
+
+
+
+
+public void deleteImages(){
+
+    File dir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString());
+    if (dir.isDirectory())
+    {
+        String[] children = dir.list();
+        for (int i = 0; i < children.length; i++)
+        {
+            new File(dir, children[i]).delete();
+        }
+    }
+
+
+
+}
 }
